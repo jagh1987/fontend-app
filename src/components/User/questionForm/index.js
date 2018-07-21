@@ -1,9 +1,9 @@
 //Dependencies
 import React, {Component} from 'react';
-import UserForm from './userForm';
-import QuestionForm from './questionForm';
+import PropTypes from 'prop-types';
+import * as ApiConstants from '../../../lib/Constants/';
 
-class User extends Component {
+class QuestionForm extends Component {
 
     constructor(props) {
         super(props);
@@ -26,12 +26,11 @@ class User extends Component {
     }
     render() {
         return (
-            <div className = "container">
-                <h3> User Details { this.state.userId } </h3>
-                <UserForm idUser={this.state.userId}></UserForm>
-                <QuestionForm idUser={this.state.userId}></QuestionForm>
-            </div>
+            <form action="" method="post" accept-charset="utf-8">
+            
+            </form>
+
         );
     }
 }
-export default User;
+export default QuestionForm;

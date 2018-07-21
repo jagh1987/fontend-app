@@ -1,13 +1,8 @@
 //Dependencies
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import * as ApiConstants from '../../lib/Constants/';
 
-//Assets
-//import './css/Content.css';
-const __API_BASE_DOMAIN__= 'http://jagh1987.000webhostapp.com/';
-const __ALL_USERS_API__ = __API_BASE_DOMAIN__+'user';
-//const __GET_USER_API__ = __API_BASE_DOMAIN__+'User/';
-const __DEL_USER_API__ = __API_BASE_DOMAIN__+'user';
 
 class Home extends Component {
   constructor(props) {
@@ -23,29 +18,31 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.setState({ isLoading: true });
+    this.setState({ isLoading: true });    
 
     //Call to get All user api
-    fetch(__ALL_USERS_API__, {method: 'GET'})
+    fetch(ApiConstants.__ALL_USERS_API__, {method: 'GET'})
     .then(response => {
       if (response.ok)
       {
         return response.json();
-      } 
-      else 
+      }
+      else
       {
         throw new Error('Something went wrong ...');
       }
     })
-      .then(data => this.setState({ responses: data.response, isLoading: false }))
-      .catch(error => this.setState({ error, isLoading: false }));
+    .then(data => this.setState({ responses: data.response, isLoading: false }))
+    .catch(error => this.setState({ error, isLoading: false }));
   }
   deleteUserClick(e){
-    console.log(__DEL_USER_API__ + '/' + e.target.id+" delete user "+e.target.id);
+    console.log(ApiConstants.__DEL_USER_API__ + '/' + e.target.id+" delete user "+e.target.id);
+    /*
+    
 
     //Call to get All user api
     fetch(__DEL_USER_API__ + '/' + e.target.id, {method: 'DELETE',headers: {'Content-type': 'application/json'}})
-    .then(response => response.json());
+    .then(response => response.json());*/
   }
   viewUserClick(e){
     console.log("View user "+e.target.id);
