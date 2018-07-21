@@ -1,12 +1,13 @@
 //Dependencies
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 //Assets
 //import './css/Content.css';
 const __API_BASE_DOMAIN__= 'http://jagh1987.000webhostapp.com/';
-const __ALL_USERS_API__ = __API_BASE_DOMAIN__+'User';
+const __ALL_USERS_API__ = __API_BASE_DOMAIN__+'user';
 //const __GET_USER_API__ = __API_BASE_DOMAIN__+'User/';
-const __DEL_USER_API__ = __API_BASE_DOMAIN__+'User';
+const __DEL_USER_API__ = __API_BASE_DOMAIN__+'user';
 
 class Home extends Component {
   constructor(props) {
@@ -40,14 +41,15 @@ class Home extends Component {
       .catch(error => this.setState({ error, isLoading: false }));
   }
   deleteUserClick(e){
-    console.log(__DEL_USER_API__+e.target.id+" delete user "+e.target.id);
+    console.log(__DEL_USER_API__ + '/' + e.target.id+" delete user "+e.target.id);
 
     //Call to get All user api
-    fetch(__DEL_USER_API__ + '/' + e.target.id, {method: 'DELETE'})
+    fetch(__DEL_USER_API__ + '/' + e.target.id, {method: 'DELETE',headers: {'Content-type': 'application/json'}})
     .then(response => response.json());
   }
   viewUserClick(e){
     console.log("View user "+e.target.id);
+    this.context.router.history.push('/User/?id='+e.target.id);
   }
 
 
@@ -81,8 +83,8 @@ class Home extends Component {
               <td>{response.Name}</td>
               <td>{response.LastName}</td>
               <td>
-                <a id={response.id} href="#"target="_self" className="btn btn-primary" onClick={this.viewUserClick} title="View Details" rel="noopener noreferrer">View</a>
-                <a id={response.id} href="#" target="_self" className="btn btn-danger" onClick={this.deleteUserClick} title="Delete This User" rel="noopener noreferrer">Delete</a>					
+                <Link id={response.id} className="btn btn-primary"  title="View Details"  to={`/User/?id=${response.id}`}>View</Link>
+                <Link id={response.id} className="btn btn-danger"  title="Delete User"  to={`/#`}  onClick={this.deleteUserClick}>Delete</Link>
                 </td>
             </tr>
           )}

@@ -15,7 +15,11 @@ class Content extends Component {
     
     return (
       <div className="container">
-        {body}
+        <div className="row">
+          <div className="col mt-3 mb-3">
+            {body}
+            </div>
+        </div>
       </div> 
     );
   }

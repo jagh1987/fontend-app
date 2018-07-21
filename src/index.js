@@ -5,7 +5,6 @@ import {BrowserRouter as Router } from 'react-router-dom';
 
 //Rpoutes
 import AppRoutes from './routes';
-
 render(
     <Router>
         <AppRoutes/>
