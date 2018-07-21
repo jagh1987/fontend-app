@@ -1,28 +1,37 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+//import PropTypes from 'prop-types';
 
 class Counter extends Component {
+
   incrementIfOdd = () => {
     if (this.props.value % 2 !== 0) {
-      this.props.onIncrement();
+      this.props.dispatch({ type: 'INCREMENT' });
     }
   };
 
   incrementAsync = () => {
-    setTimeout(this.props.onIncrement, 1000);
+    setTimeout(this.props.dispatch({ type: 'INCREMENT' }), 1000)
   };
+  
+  increment=()=> {
+    this.props.dispatch({ type: 'INCREMENT' });
+  }
+  decrement=()=> {
+    this.props.dispatch({ type: 'DECREMENT' });
+  }
 
   render() {
-    const { value, onIncrement, onDecrement } = this.props;
+    //const { value, onIncrement, onDecrement } = this.props;
     return (
       <p>
-        Clicked: {value} times
+        Clicked: {this.props.value} times
         {" "}
-        <button onClick={onIncrement}>
+        <button onClick={this.increment}>
           +
         </button>
         {" "}
-        <button onClick={onDecrement}>
+        <button onClick={this.decrement}>
           -
         </button>
         {" "}
@@ -38,10 +47,7 @@ class Counter extends Component {
   }
 }
 
-Counter.propTypes = {
-  value: PropTypes.number.isRequired,
-  onIncrement: PropTypes.func.isRequired,
-  onDecrement: PropTypes.func.isRequired
-};
-
-export default Counter;
+const mapStateToProps= state =>({
+  value: state.count
+});
+export default connect(mapStateToProps)(Counter);

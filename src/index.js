@@ -1,18 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {Provider} from 'react-redux';
 import { createStore } from 'redux'
 import App from './components/App'
-import Reducer from './components/reducers/'
+import Reducer from './lib/Redux/reducers/'
 
-const store = createStore(Reducer)
-const rootEl = document.getElementById('root')
+
+// 1 CREATE THE STORE
+const store = createStore(Reducer);
+const rootEl = document.getElementById('root');
+
+store.dispatch({ type: 'INCREMENT' }); 
+store.dispatch({ type: 'DECREMENT' });
 
 const render = () => ReactDOM.render(
-  <App
-    value={store.getState()}
-    onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
-    onDecrement={() => store.dispatch({ type: 'DECREMENT' })}
-  />
+  <Provider store={store}>
+    <App />
+  </Provider>
   ,
   rootEl
 )
