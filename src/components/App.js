@@ -1,27 +1,15 @@
 //Dependencies
 import React, { Component } from 'react';
-import ProTypes from 'prop-types';
 
-//components
-import Header from './Global/Header';
-import Content from './Global/Content';
-import Footer from './Global/Footer';
-
-//Data
-import items from '../data/menu';
+import AppRoutes from './routes';
+import {BrowserRouter as Router } from 'react-router-dom';
 
 class App extends Component {
-  static ProTypes={
-    children: ProTypes.object.isRequired
-  }
-   render() {
-    const {children} = this.props;
+   render() {    
     return (
-      <div className="App">
-        <Header title="FrontEnd ReactJs App" items={items}/>
-        <Content body={children} />
-        <Footer />
-      </div>
+      <Router>
+        <AppRoutes/>
+    </Router>
     );
   }
 }
