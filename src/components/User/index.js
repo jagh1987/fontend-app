@@ -7,7 +7,8 @@ class User extends Component {
 
     constructor(props) {
         super(props);
-        const Id= new URLSearchParams(window.location.search).get("id");
+        var Id= new URLSearchParams(window.location.search).get("id");
+        Id= (Id!=null)? Id : 0;
         this.state = {userId: Id};        
         this.toggleIdUserForm = this.toggleIdUserForm.bind(this);
     }
@@ -21,9 +22,9 @@ class User extends Component {
     }
     render() {
         const { userId }= this.state;
+        
         return (
             <div className = "container">
-                <h3> User Details { userId } </h3>
                 <UserForm userId={ userId}></UserForm>
                 <QuestionForm userId={userId}></QuestionForm>
             </div>

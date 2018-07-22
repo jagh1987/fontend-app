@@ -6,34 +6,31 @@ import * as ApiConstants from '../../../lib/Constants/';
 class UserForm extends Component {
     
     static propTypes={ userId: PropTypes.number.isRequired};
+    
   constructor(props) {
       super(props);
+      
       this.state = {
             userId:0,
-            response: [],
+            userData: [],
             isLoading: false,
             error: null,
             readOnly: false
-        }        
-        //this.handleInputChange = this.handleInputChange.bind(this);
- }/*
+        }
+        this.handleSubmit= this.handleSubmit(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+ }
     handleInputChange(event) {
-        alert('');
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        this.setState({
-            [name]: value
-        });
-    }*/
+        //console.log('changed input= '+event.target.id+' value= '+event.target.value);
+    }
     handleSubmit(event) {
-        console.log('A name was submitted: ' + this.state.value);
-        event.preventDefault();
+        //const { userId } = this.props;
+        //console.log('changed input= '+event.target);
     }
     componentDidMount() {        
         const { userId } = this.props;
         this.setState({ userId: userId, isLoading: true });
-        this.state.userId= userId;
+        //this.state.userId= userId;
         
         const {response, readOnly}= this.state;    
         fetch(ApiConstants.__GET_USER_API__+userId, {method: 'GET'})
@@ -47,34 +44,37 @@ class UserForm extends Component {
               throw new Error('Something went wrong ...');
             }
           })
-          .then(data => this.setState({ response: data.response, isLoading: false }))
+          .then(data => this.setState({ userData: data.response, isLoading: false }))
           .catch(error => this.setState({ error, isLoading: false }));
     };
     render() {
-        const {userId, response, isLoading, error, readOnly } = this.state;
-        console.log("In render UserForm= "+userId + " state= "+this.state.userId);
+        const {userId, userData, isLoading, error, readOnly } = this.state;
+        //console.log("-- "+ApiConstants.__GET_USER_API__+'/'+userId+" --");
+        //console.log(response);
+        //console.log("--------------------------------------------------------------------");
       return (
-          <form onSubmit={this.handleSubmit}>
+          <form id="_userForm" onSubmit={this.handleSubmit}>
             <div className="card">                
-                <div className="card-body" key={response.id}>
-                    <div className="form-group">
-                        <input type="submit" value="UpdateUser..." className="btn btn-primary float-right" />
+                <div className="card-body" key={userData.id}>
+                    <input type="submit" value={(userId>0)?"UpdateUser...":"Save User"} className="btn btn-primary float-right" />
+                    <div className="form-group">                        
+                        <h5 class="card-title">User Form</h5>                        
                     </div>
                     <div className="form-group">
                         <label for="userid">id</label>
-                        <input type="text" readOnly={readOnly} name="userid" value={response.id} placeholder="User Id" className="form-control" disabled="disabled" />
+                        <input type="text" readOnly={readOnly} name="userid" id="userid" value={userData.id} placeholder="User Id" className="form-control" disabled="disabled" />
                     </div>
                     <div className="form-group">
                         <label for="userName">User Name</label>
-                        <input type="text" readOnly={readOnly} name="userName" value={response.userName} placeholder="User Name" className="form-control" />
+                        <input type="text" readOnly={readOnly} name="userName" id="userName" value={userData.userName} placeholder="User Name" className="form-control" />
                     </div>
                     <div className="form-group">
                         <label for="Name">Name</label>
-                        <input type="text" readOnly={readOnly} name="Name" value={response.Name} placeholder="Name" className="form-control" />
+                        <input type="text" readOnly={readOnly} name="Name" id="Name" value={userData.Name} placeholder="Name" className="form-control" />
                     </div>
                     <div className="form-group">
                         <label for="LastName">Last Name</label>
-                        <input type="text" readOnly={readOnly} name="LastName" value={response.LastName} placeholder="Last Name" className="form-control" />
+                        <input type="text" readOnly={readOnly} name="LastName" id="LastName" value={userData.LastName} placeholder="Last Name" className="form-control" />
                     </div>
                 </div>
             </div>
