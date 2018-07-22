@@ -7,29 +7,25 @@ class User extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {userId: 0};
-
+        const Id= new URLSearchParams(window.location.search).get("id");
+        this.state = {userId: Id};        
         this.toggleIdUserForm = this.toggleIdUserForm.bind(this);
     }
     toggleIdUserForm() {
         this.setState(state => ({
-            userId: !state.userId
+            userId: state.userId
         }));
-     }
-
+    }
     componentDidMount() {
-        const userId= new URLSearchParams(window.location.search).get("id");
-        this.setState({ userId: userId });
-        console.log("UserForm passing value= "+this.state.userId);
-
         this.toggleIdUserForm();
     }
     render() {
+        const { userId }= this.state;
         return (
             <div className = "container">
-                <h3> User Details { this.state.userId } </h3>
-                <UserForm idUser={this.state.userId}></UserForm>
-                <QuestionForm idUser={this.state.userId}></QuestionForm>
+                <h3> User Details { userId } </h3>
+                <UserForm userId={ userId}></UserForm>
+                <QuestionForm userId={userId}></QuestionForm>
             </div>
         );
     }

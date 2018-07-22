@@ -5,17 +5,18 @@ import * as ApiConstants from '../../../lib/Constants/';
 
 class UserForm extends Component {
     
-  static propTypes={ idUser: PropTypes.string.isRequired };
+    static propTypes={ userId: PropTypes.number.isRequired};
   constructor(props) {
       super(props);
       this.state = {
-        response: [],
-          isLoading: false,
-          readOnly: false,
-          error: null
-        };
+            userId:0,
+            response: [],
+            isLoading: false,
+            error: null,
+            readOnly: false
+        }        
         //this.handleInputChange = this.handleInputChange.bind(this);
-  }/*
+ }/*
     handleInputChange(event) {
         alert('');
         const target = event.target;
@@ -29,10 +30,12 @@ class UserForm extends Component {
         console.log('A name was submitted: ' + this.state.value);
         event.preventDefault();
     }
-    componentDidMount() {
-        this.setState({ isLoading: true });
-        console.log(ApiConstants.__GET_USER_API__+this.props.idUser);
-        const userId= new URLSearchParams(window.location.search).get("id");
+    componentDidMount() {        
+        const { userId } = this.props;
+        this.setState({ userId: userId, isLoading: true });
+        this.state.userId= userId;
+        
+        const {response, readOnly}= this.state;    
         fetch(ApiConstants.__GET_USER_API__+userId, {method: 'GET'})
         .then(response => {
             if (response.ok)
@@ -48,12 +51,11 @@ class UserForm extends Component {
           .catch(error => this.setState({ error, isLoading: false }));
     };
     render() {
-//        const {idUser}= this.props;
-        const {response, readOnly, error}= this.state;        
+        const {userId, response, isLoading, error, readOnly } = this.state;
+        console.log("In render UserForm= "+userId + " state= "+this.state.userId);
       return (
-        <form onSubmit={this.handleSubmit}>
-            <div className="card">
-                
+          <form onSubmit={this.handleSubmit}>
+            <div className="card">                
                 <div className="card-body" key={response.id}>
                     <div className="form-group">
                         <input type="submit" value="UpdateUser..." className="btn btn-primary float-right" />
@@ -75,7 +77,8 @@ class UserForm extends Component {
                         <input type="text" readOnly={readOnly} name="LastName" value={response.LastName} placeholder="Last Name" className="form-control" />
                     </div>
                 </div>
-            </div>            
+            </div>
+            <br />
         </form>
       );
     }

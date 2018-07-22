@@ -1,5 +1,5 @@
 //Reducer Initial State
-const initialState = { idUser: 1 };
+const initialState = { userId: 1 };
 
 //Reducer
 export default (state = initialState, action) => {
@@ -7,11 +7,11 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case 'GET':
       return {
-        idUser: state.count + 1
+        userId: state.count + 1
       };
     case 'DECREMENT':
       return {
-        idUser: state.count - 1
+        userId: state.count - 1
       };
     default:
       return state;

@@ -30,6 +30,59 @@
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"></div>
+    <script>
+      $(function() {
+          $("#sel1").val("are");
+          $("#sel2").val("is");
+          $("#sel3").val("are");
+          $("#sel4").val("is");
+  
+          $("input[name='q2'][value='man']").attr('checked', 'checked');
+  
+          $("#txt1").val("are");
+          $("#txt2").val("man");
+          $("#txt3").val("is");
+          $("#txt4").val("boy");
+          $("#txt5").val("are");
+          $("#txt6").val("is");
+  
+         
+  
+          validateForm();
+      });  
+      function validateForm()
+      {
+          validateSelect("sel1","are");
+          validateSelect("sel2","is");
+          validateSelect("sel3","are");
+          validateSelect("sel4","is");
+          
+          $("img").removeClass("is-valid");
+          $("img").removeClass("is-invalid");
+          $("#img-"+$("input[name='q2']:checked").val()).addClass( ($("input[name='q2']:checked").val()=="man")? "is-valid":"is-invalid" );
+  
+          validateTextbox("txt1","are");
+          validateTextbox("txt2","man");
+          validateTextbox("txt3","is");
+          validateTextbox("txt4","boy");
+          validateTextbox("txt5","are");
+          validateTextbox("txt6","is");
+      }
+      function validateSelect(sel,correctAnswer)
+      {
+          removeValidationClass(sel);
+          $("#"+sel+"").addClass( ($("#"+sel+" option:selected").text()==correctAnswer)? "is-valid":"is-invalid" );
+      }
+      function validateTextbox(textbox,correctAnswer){
+          removeValidationClass(textbox);
+          $("#"+textbox+"").addClass( ($("#"+textbox+"").val()==correctAnswer)? "is-valid":"is-invalid" );
+      }
+      function removeValidationClass(elem)
+      {
+          $("#"+elem+"").removeClass("is-valid");
+          $("#"+elem+"").removeClass("is-invalid");
+      }
+  </script>
     <script src="bundle.js"></script>
     <!--
       This HTML file is a template.
