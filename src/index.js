@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux';
 import { createStore } from 'redux'
 import App from './components/App'
-import Reducer from './lib/Redux/reducers/'
+import reducer from './lib/Redux/reducers/'
 
 
 // 1 CREATE THE STORE
-const store = createStore(Reducer);
+//const store = createStore(reducer);
+const store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)(reducer);
 const rootEl = document.getElementById('root');
 
 store.dispatch({ type: 'INCREMENT' }); 
