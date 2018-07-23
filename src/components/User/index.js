@@ -9,7 +9,7 @@ class User extends Component {
     constructor(props) {
         super(props);
         var queryString= new URLSearchParams(window.location.search).get("id");
-        var Id= (queryString!=null)? parseInt(queryString) : 0;
+        var Id= (queryString!=null)? parseInt(queryString,10) : 0;
 
         (Id>0)? this.props.dispatch({ type: 'DISABLE' }):this.props.dispatch({ type: 'ENABLE' });
 

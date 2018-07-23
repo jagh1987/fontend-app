@@ -37,16 +37,13 @@ class Home extends Component {
   }
   deleteUserClick(e){
     console.log(ApiConstants.__DEL_USER_API__ + '/' + e.target.id+" delete user "+e.target.id);
-    /*
-    
-
     //Call to get All user api
-    fetch(__DEL_USER_API__ + '/' + e.target.id, {method: 'DELETE',headers: {'Content-type': 'application/json'}})
-    .then(response => response.json());*/
+    fetch(ApiConstants.__DEL_USER_API__ + '/' + e.target.id, {method: 'DELETE',headers: {'Content-type': 'application/json'}})
+    .then(response => response.json());
   }
   viewUserClick(e){
     console.log("View user "+e.target.id);
-    this.context.router.history.push('/User/?id='+e.target.id);
+    this.context.router.history.push(ApiConstants.DOMAIN+'/User/?id='+e.target.id);
   }
 
 

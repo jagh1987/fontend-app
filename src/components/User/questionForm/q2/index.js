@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Field } from 'redux-form'
+//import { Field } from 'redux-form'
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import * as ApiConstants from '../../../../lib/Constants/';
@@ -64,21 +64,21 @@ class Question2Form extends Component {
                     <div className="col text-center">
                         <label className="check-container">
                             <img src={ApiConstants.__API_BASE_DOMAIN__+"/assets/img/woman.png"} title="woman" id="img-woman" alt="woman" className="img-thumbnail mx-auto d-block"/>
-                            <input type="radio" name="q2" value="man" id="woman" checked={ (response=='woman')? 'checked':'' } onChange={this.handleCheckBoxChange}  disabled= {disableString}/>
+                            <input type="radio" name="q2" value="man" id="woman" checked={ (response==='woman')? 'checked':'' } onChange={this.handleCheckBoxChange}  disabled= {disableString}/>
                             <span className="checkmark"></span>
                         </label>
                     </div>
                     <div className="col text-center">
                         <label className="check-container">
                             <img src={ApiConstants.__API_BASE_DOMAIN__+"/assets/img/man.png"} title="man" id="img-man" alt="man" className="img-thumbnail mx-auto d-block is-valid"/>
-                            <input type="radio" name="q2" value="man" id="man" checked={ (response=='man')? 'checked':'' } onChange={this.handleCheckBoxChange}  disabled= {disableString}/>
+                            <input type="radio" name="q2" value="man" id="man" checked={ (response==='man')? 'checked':'' } onChange={this.handleCheckBoxChange}  disabled= {disableString}/>
                             <span className="checkmark"></span>
                         </label>
                     </div>
                     <div className="col text-center">
                         <label className="check-container">
                             <img src={ApiConstants.__API_BASE_DOMAIN__+"/assets/img/boy.png"} title="boy" id="img-boy" alt="boy" className="img-thumbnail mx-auto d-block"/>
-                            <input type="radio" name="q2" value="boy" id="boy" checked={ (response=='boy')?'checked':'' } onChange={this.handleCheckBoxChange} disabled= {disableString}/>
+                            <input type="radio" name="q2" value="boy" id="boy" checked={ (response==='boy')?'checked':'' } onChange={this.handleCheckBoxChange} disabled= {disableString}/>
                             <span className="checkmark"></span>
                         </label>
                     </div>

@@ -18,15 +18,28 @@ class UserForm extends Component {
             error: null,
             disabled: false
         }
-        this.handleSubmit= this.handleSubmit(this);
+        //this.handleSubmit= this.handleSubmit(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.onClickUpdate= this.onClickUpdate.bind(this);
+        this.onClickPreventDefault = this.onClickPreventDefault.bind(this);
  }
+ 
+ onClickPreventDefault(e) {
+    this.setState({ userId: this.props.userId, isLoading: true, disabled: this.props.disabled });
+    this.props.dispatch({ type: 'ENABLE' })    
+    e.preventDefault();
+  }
+  onClickUpdate(e)
+  {
+    e.preventDefault();
+  }
     handleInputChange(event) {
         //console.log('changed input= '+event.target.id+' value= '+event.target.value);
     }
-    handleSubmit(event) {
+    handleSubmit(e) {
         //const { userId } = this.props;
         //console.log('changed input= '+event.target);
+        //e.preventDefault();
     }
     componentDidMount() {        
         const { userId } = this.props;
@@ -54,30 +67,32 @@ class UserForm extends Component {
     render() {
         const {userId, userData, disabled } = this.state;
         var disableString= (disabled)? "disabled" : "";
-        
+        var editDisplay= (disabled===true)? 'visible':'hidden';
+        var saveDisplay= (disabled!==false)?'visible':'hidden';
 
       return (
           <form id="_userForm" onSubmit={this.handleSubmit}>
             <div className="card">                
                 <div className="card-body" key={userData.id}>
-                    <input type="submit" value={(userId>0)?"UpdateUser...":"Save User"} className="btn btn-primary float-right" />
+                    <input type="submit" value={(userId>0)?"UpdateUser...":"Save User"} className="btn btn-primary float-right" onCick={this.onClickUpdate} style={{display:saveDisplay}}/>
+                    <input type="submit" value={"Edit"} className="btn btn-primary float-right" style={{display:editDisplay}} onCick={this.onClickPreventDefault}/>
                     <div className="form-group">                        
                         <h5 className="card-title">User Form</h5>                        
                     </div>
                     <div className="form-group">
-                        <label for="userid">id</label>
+                        <label>id</label>
                         <input type="text" name="userid" id="userid" value={userData.id} placeholder="User Id" className="form-control" disabled= {disableString}/>
                     </div>
                     <div className="form-group">
-                        <label for="userName">User Name </label>
+                        <label>User Name </label>
                         <input type="text" name="userName" id="userName" value={userData.userName} placeholder="User Name" className="form-control" disabled= {disableString}/>
                     </div>
                     <div className="form-group">
-                        <label for="Name">Name</label>
+                        <label>Name</label>
                         <input type="text" name="Name" id="Name" value={userData.Name} placeholder="Name" className="form-control" disabled= {disableString} />
                     </div>
                     <div className="form-group">
-                        <label for="LastName">Last Name</label>
+                        <label>Last Name</label>
                         <input type="text" name="LastName" id="LastName" value={userData.LastName} placeholder="Last Name" className="form-control" disabled= {disableString} />
                     </div>
                 </div>
