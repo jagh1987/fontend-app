@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-//import { Field } from 'redux-form'
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import * as ApiConstants from '../../../../lib/Constants/';
 
@@ -7,13 +7,12 @@ class Question1Form extends Component {
     static propTypes={ userId: PropTypes.number.isRequired};
     constructor(props) {
         super(props);
-        //const Id= new URLSearchParams(window.location.search).get("id");
         this.state = {
             userId: 0, 
             response: [],
             isLoading: false, 
             error: null, 
-            readOnly: false
+            disabled: false
         };
         this.handleSelectChange = this.handleSelectChange.bind(this);
     }
@@ -24,7 +23,7 @@ class Question1Form extends Component {
     }
     componentDidMount() {        
         const { userId } = this.props;
-        this.setState({ userId: userId, isLoading: true });
+        this.setState({ userId: userId, isLoading: true, disabled: this.props.disabled });
         const questionNumber= 1;
         fetch(ApiConstants.__GET_ANSWERS_API__+'/'+userId+'/'+questionNumber, {method: 'GET'})
         .then(response => {
@@ -45,94 +44,106 @@ class Question1Form extends Component {
         //setTimeout(window.validateForm(), 3000)
     }
     render() {
-        const {userId, response, isLoading, error, readOnly } = this.state;
+        const {userId, response, isLoading, error, disabled } = this.state;
         console.log("-- "+ApiConstants.__GET_ANSWERS_API__+'/'+userId+'/'+1+" --");
         console.log(response);
         console.log("--------------------------------------------------------------------");
-
-        return (
-            <div className="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        
+        var disableString= (disabled)? "disabled" : "";       
+    
+    if (error) {
+        return <div className="alert alert-danger" role="alert">{error.message}</div>;
+    }
+    if (isLoading) {
+        return <div className="alert alert-info" role="alert">Loading ...</div>;
+    }
+    return (
+        <div className="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
             <h3 className="text-center">Usuario {userId} Seleccione la respuesta correcta</h3>
             <br />
-    
-    <div className="row">
-        <div className="col-lg-6 col-lg-6 col-md-12 col-xs-12">
             <div className="row">
-                <div className="col">
-                    <p className="lead text-right"><strong>You</strong></p>
+                <div className="col-lg-6 col-lg-6 col-md-12 col-xs-12">
+                    <div className="row">
+                        <div className="col">
+                            <p className="lead text-right"><strong>You</strong></p>
+                        </div>
+                        <div className="col">
+                            <select className="form-control is-valid" name="sel1" id="sel1" value={response.sel1} onChange={this.handleSelectChange} disabled= {disableString}>
+                                <option>seleccione</option>
+                                <option>are</option>
+                                <option>am</option>
+                                <option>is</option>
+                            </select>
+                        </div>
+                        <div className="col">
+                            <p className="lead text-left"><strong>a man</strong></p>
+                        </div>
+                    </div>
                 </div>
-                <div className="col">
-                    <select className="form-control is-valid" name="sel1" id="sel1" value={response.sel1} onChange={this.handleSelectChange} component="select">
-                        <option>seleccione</option>
-                        <option>are</option>
-                        <option>am</option>
-                        <option>is</option>
-                    </select>
+                <div className="col-lg-6 col-lg-6 col-md-12 col-xs-12">
+                    <div className="row">
+                        <div className="col">
+                            <p className="lead text-right"><strong>He</strong></p>
+                        </div>
+                        <div className="col">
+                            <select className="form-control is-valid" name="sel2" id="sel2" value={response.sel2} onChange={this.handleSelectChange} disabled= {disableString}>
+                                <option>seleccione</option>
+                                <option>am</option>
+                                <option>is</option>
+                                <option>are</option>
+                            </select>
+                        </div>
+                        <div className="col">
+                            <p className="lead text-left"><strong>a boy</strong></p>
+                        </div>
+                    </div>
                 </div>
-                <div className="col">
-                    <p className="lead text-left"><strong>a man</strong></p>
+            </div>
+            <div className="row">
+                <div className="col-lg-6 col-lg-6 col-md-12 col-xs-12">
+                    <div className="row">
+                        <div className="col">
+                            <p className="lead text-right"><strong>They</strong></p>
+                        </div>
+                        <div className="col">
+                            <select className="form-control is-valid" name="sel3" id="sel3" value={response.sel3} onChange={this.handleSelectChange} disabled= {disableString}>
+                                <option>seleccione</option>
+                                <option>am</option>
+                                <option>is</option>
+                                <option>are</option>
+                            </select>
+                        </div>
+                        <div className="col">
+                            <p className="lead text-left"><strong>girls</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-lg-6 col-lg-6 col-md-12 col-xs-12">
+                    <div className="row">
+                        <div className="col">
+                            <p className="lead text-right"><strong>She</strong></p>
+                        </div>
+                        <div className="col">
+                            <select  className="form-control is-valid" name="sel4" id="sel4" value={response.sel3} onChange={this.handleSelectChange} disabled= {disableString}>
+                                <option>seleccione</option>
+                                <option>is</option>
+                                <option>am</option>
+                                <option>are</option>
+                            </select >
+                        </div>
+                        <div className="col">
+                            <p className="lead text-left"><strong>a girl</strong></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div className="col-lg-6 col-lg-6 col-md-12 col-xs-12">
-            <div className="row">
-                    <div className="col">
-                        <p className="lead text-right"><strong>He</strong></p>
-                    </div>
-                    <div className="col">
-                        <select className="form-control is-valid" name="sel2" id="sel2" value={response.sel2} onChange={this.handleSelectChange} component="select">
-                            <option>seleccione</option>
-                            <option>am</option>
-                            <option>is</option>
-                            <option>are</option>
-                        </select>
-                    </div>
-                    <div className="col">
-                        <p className="lead text-left"><strong>a boy</strong></p>
-                    </div>
-                </div>
-        </div>
-    </div>
-    <div className="row">
-    <div className="col-lg-6 col-lg-6 col-md-12 col-xs-12">
-            <div className="row">
-                <div className="col">
-                    <p className="lead text-right"><strong>They</strong></p>
-                </div>
-                <div className="col">
-                    <select className="form-control is-valid" name="sel3" id="sel3" value={response.sel3} onChange={this.handleSelectChange} component="select">
-                        <option>seleccione</option>
-                        <option>am</option>
-                        <option>is</option>
-                        <option>are</option>
-                    </select>
-                </div>
-                <div className="col">
-                    <p className="lead text-left"><strong>girls</strong></p>
-                </div>
-            </div>
-        </div>
-        <div className="col-lg-6 col-lg-6 col-md-12 col-xs-12">
-            <div className="row">
-                    <div className="col">
-                        <p className="lead text-right"><strong>She</strong></p>
-                    </div>
-                    <div className="col">
-                        <select  className="form-control is-valid" name="sel4" id="sel4" value={response.sel3} onChange={this.handleSelectChange} component="select">
-                            <option>seleccione</option>
-                            <option>is</option>
-                            <option>am</option>
-                            <option>are</option>
-                        </select >
-                    </div>
-                    <div className="col">
-                        <p className="lead text-left"><strong>a girl</strong></p>
-                    </div>
-                </div>
-        </div>
-    </div>
-</div>
         );
     }
 }
-export default Question1Form;
+//export default Question1Form;
+
+const mapStateToProps= state =>({
+    disabled: state.appForms.disabled
+  });
+  export default connect(mapStateToProps)(Question1Form);

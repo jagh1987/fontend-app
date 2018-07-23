@@ -5,7 +5,7 @@ class Page404 extends Component{
     render (){
         return (
             <div className="container">
-                <h1 className="text-danger">Page404</h1>
+                <h1 className="text-danger text-center">Page404</h1>
             </div>
         );
     }

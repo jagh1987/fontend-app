@@ -25,30 +25,30 @@ class QuestionForm extends Component {
         {
             return (
                 <form action={ApiConstants.__API_BASE_DOMAIN__+"/aswer"} method="post" acceptCharset="utf-8">
-        <div class="card">
-            <div class="card-body">
-                <input type="submit" value="Save" class="btn btn-primary float-right"/>
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        <div className="card">
+            <div className="card-body">
+                <input type="submit" value="Save" className="btn btn-primary float-right"/>
+                <div className="tab-content" id="pills-tabContent">
+                    <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                         <Question1Form userId={userId} />
                     </div>
-                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                         <Question2Form userId={userId} />
                     </div>
-                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                    <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                         <Question3Form userId={userId} />
                     </div>
                 </div>
                 <br />
-                <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">1</a>
+                <ul className="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+                    <li className="nav-item">
+                        <a className="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">1</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">2</a>
+                    <li className="nav-item">
+                        <a className="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">2</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">3</a>
+                    <li className="nav-item">
+                        <a className="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">3</a>
                     </li>
                 </ul>
             </div>
@@ -59,7 +59,7 @@ class QuestionForm extends Component {
         else
         {
             return (
-                <div class="alert alert-primary" role="alert">
+                <div className="alert alert-primary" role="alert">
                     Please fill user form
                 </div>
             );

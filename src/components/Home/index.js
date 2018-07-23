@@ -54,10 +54,10 @@ class Home extends Component {
     const { responses, isLoading, error } = this.state;
     
     if (error) {
-      return <p>{error.message}</p>;
+      return <div className="alert alert-danger" role="alert">{error.message}</div>;
     }
     if (isLoading) {
-      return <p>Loading ...</p>;
+      return <div className="alert alert-info" role="alert">Loading ...</div>;
     }
     return (
       <div className="Content container">

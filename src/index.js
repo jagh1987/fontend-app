@@ -13,6 +13,8 @@ const rootEl = document.getElementById('root');
 
 store.dispatch({ type: 'INCREMENT' }); 
 store.dispatch({ type: 'DECREMENT' });
+store.dispatch({type: 'DISABLE'});
+store.dispatch({type: 'ENABLE'});
 
 const render = () => ReactDOM.render(
   <Provider store={store}>
